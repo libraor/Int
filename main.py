@@ -28,30 +28,49 @@ j = -1
 while y <=(lilv1[j]-25569)*24*3600:
 	j-=1
 
-'''print x
+print x
 print (lilv1[0]-25569)*24*3600
 print i
 print j
 print lilv1[i:j+1]
-'''
+
 
 #计算欠款天数,并确定适用利率水平
 day = (y-x)/3600/24
+print day
+
 if day<=180:
         lilv=lilv2
-elif day>180&&day<=360:
+elif day>180&day<=360:
         lilv=lilv3
-elif day>360&&day<=1080:
+elif day>360&day<=1080:
         lilv=lilv4
-elif day>1080&&day<=1800:
+elif day>1080&day<=1800:
         lilv=lilv5
 else:
         lilv=lilv6
 
+#print lilv[:]
+print lilv1[i]
+print lilv1[j]
 
+#计算欠款利息 25569为调整excel时间与时间戳起算点差异
+#lixi = day*lilv*z 
+lixi =0        
+lixiall = 0
+print lixiall
 
-#计算欠款利息
-#lixi = day*lilv*z
+while lilv1[i] <= lilv1[j]:
+        lixi = ((lilv1[i]-25569)-(x/3600/24))*lilv[i]/100/360*z
+        lixiall = lixiall + lixi
+        print lixi
+        i+=1
+else:
+        lixi = ((y/3600/24)-(lilv1[j]-25569))*lilv[j]/100/360*z
+        lixiall = lixiall + lixi
+        print lixi
+
+print lixiall
 
 
 #将计算过程导出到excel
