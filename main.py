@@ -36,16 +36,16 @@ j = -1
 while y <=(lilv1[j]-25569)*24*3600:
 	j-=1
 
-print x
-print (lilv1[0]-25569)*24*3600
-print i
-print j
-print lilv1[i:j+1]
+#print x
+#print (lilv1[0]-25569)*24*3600
+#print i
+#print j
+#print lilv1[i:j+1]
 
 
 #计算欠款天数,并确定适用利率水平,六个月记为180天，一年记为360天
 day = (y-x)/3600/24
-print day
+#print day
 
 if day<=180:
         lilv=lilv2
@@ -59,8 +59,8 @@ else:
         lilv=lilv6
 
 #print lilv[:]
-print lilv1[i]
-print lilv1[j]
+#print lilv1[i]
+#print lilv1[j]
 
 '''计算欠款利息
 25569为调整excel时间与时间戳起算点差异
@@ -73,24 +73,25 @@ day2 为计息日期差值
 lixi =0        
 lixiall = 0
 day2 = (lilv1[i]-25569)-(x/3600/24)-1
-print lixiall
+#print lixiall
 
 while lilv1[i] <= lilv1[j]:
         lixi = day2*lilv[i-1]/100/360*z
         lixiall = lixiall + lixi
-        print day2
-        print lilv[i-1]
-        print lixi
+        print day2,'*年息', lilv[i-1],'%=', lixi
+        if i == len(lilv)-1:
+                lixi = ((y/3600/24)-(lilv1[j]-25569)+1)*lilv[j]/100/360*z
+                lixiall = lixiall + lixi
+                print (y/3600/24)-(lilv1[j]-25569)+1,'*年息',lilv[j],'%=', lixi
+                break
         i+=1
         day2 = lilv1[i]-lilv1[i-1]
 else:
         lixi = ((y/3600/24)-(lilv1[j]-25569)+1)*lilv[j]/100/360*z
         lixiall = lixiall + lixi
-        print (y/3600/24)-(lilv1[j]-25569)+1
-        print lilv[j]
-        print lixi
+        print (y/3600/24)-(lilv1[j]-25569)+1,'*年息',lilv[j],'%=', lixi
 
-print lixiall
+print '利息合计：',lixiall
 
 
 #将计算过程导出到excel
