@@ -90,7 +90,15 @@ def lixi(x,y,z):
                         dateout1 = date1.strftime("%Y年%m月%d日")
                         date2 = datetime.datetime.utcfromtimestamp(lilv1[i]*24*3600)
                         dateout2 = date2.strftime("%Y年%m月%d日")
-                print dateout1,dateout2,day2,'天 * 年息', lilv[i-1],'% =', lixi
+                result = [dateout1,dateout2,day2,'天 * 年息', lilv[i-1],'% =', lixi] #输出到txt
+                for k in range(0,7): 
+                        result[k] = str(result[k])
+                str1 = " "
+                str1 = str1.join(result)
+                print str1
+                f = open("text.txt",'a')
+                f.write(str1+'\n')
+                f.close()
                 if i == len(lilv)-1:
                         lixi = ((y/3600/24)-lilv1[j]+1)*lilv[j]/100/360*z
                         lixiall = lixiall + lixi
@@ -98,7 +106,15 @@ def lixi(x,y,z):
                         dateout1 = date1.strftime("%Y年%m月%d日")
                         date2 = datetime.datetime.utcfromtimestamp(y+28800)
                         dateout2 = date2.strftime("%Y年%m月%d日")
-                        print dateout1,dateout2,(y/3600/24)-lilv1[j]+1,'天 * 年息',lilv[j],'% =', lixi
+                        result = [dateout1,dateout2,(y/3600/24)-lilv1[j]+1,'天 * 年息',lilv[j],'% =', lixi] #输出到txt
+                        for k in range(0,7): 
+                                result[k] = str(result[k])
+                        str1 = " "
+                        str1 = str1.join(result)
+                        print str1
+                        f = open("text.txt",'a')
+                        f.write(str1+'\n')
+                        f.close()
                         break
                 i+=1
                 day2 = lilv1[i]-lilv1[i-1]
@@ -109,28 +125,48 @@ def lixi(x,y,z):
                 dateout1 = date1.strftime("%Y年%m月%d日")
                 date2 = datetime.datetime.utcfromtimestamp(y+28800)
                 dateout2 = date2.strftime("%Y年%m月%d日")
-                print dateout1,dateout2,(y/3600/24)-lilv1[j]+1,'天 * 年息',lilv[j],'% =', lixi
+                result = [dateout1,dateout2,(y/3600/24)-lilv1[j]+1,'天 * 年息',lilv[j],'% =', lixi] #输出到txt
+                for k in range(0,7): 
+                        result[k] = str(result[k])
+                str1 = " "
+                str1 = str1.join(result)
+                print str1
+                f = open("text.txt",'a')
+                f.write(str1+'\n')
+                f.close()
 
-        print '分段利息合计：',lixiall
+        result = ['分段利息合计：',lixiall]  #输出到txt
+        result[1] = str(result[1])
+        str1 = " "
+        str1 = str1.join(result)
+        print str1
+        f = open("text.txt",'a')
+        f.write(str1+'\n')
+        f.close()
         lixiall2 = lixiall2 + lixiall
 
         return
 
 
-        #将计算过程导出到txt
-
 lixiall2 = 0 #全局变量
-#ss = 1
-ss = input("分段数：")
+ss = 1
+#ss = input("分段数：")
 i = 0
 while ss > i :
-        #x = "2014/1/1"
-        x = raw_input("欠款时间（格式2015/1/1）：")
-        #y = "2015/11/1"
-        y = raw_input("还款时间（格式2015/1/1）：")
-        #z = 10000
-        z = input("欠款金额：")
+        x = "2014/1/1"
+        #x = raw_input("欠款时间（格式2015/1/1）：")
+        y = "2015/11/1"
+        #y = raw_input("还款时间（格式2015/1/1）：")
+        z = 10000
+        #z = input("欠款金额：")
         lixi(x,y,z)
         i+=1
 
-print '利息总计：',lixiall2
+result = ['利息总计：',lixiall2] #输出到txt
+result[1] = str(result[1])
+str1 = " "
+str1 = str1.join(result)
+print str1
+f = open("text.txt",'a')
+f.write(str1+'\n')
+f.close()
