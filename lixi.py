@@ -105,7 +105,11 @@ def lixi(x,y,z):
         else:
                 lixi = ((y/3600/24)-lilv1[j]+1)*lilv[j]/100/360*z
                 lixiall = lixiall + lixi
-                print (y/3600/24)-lilv1[j]+1,'天 * 年息',lilv[j],'% =', lixi
+                date1 = datetime.datetime.utcfromtimestamp(lilv1[j]*24*3600)
+                dateout1 = date1.strftime("%Y年%m月%d日")
+                date2 = datetime.datetime.utcfromtimestamp(y+28800)
+                dateout2 = date2.strftime("%Y年%m月%d日")
+                print dateout1,dateout2,(y/3600/24)-lilv1[j]+1,'天 * 年息',lilv[j],'% =', lixi
 
         print '分段利息合计：',lixiall
         lixiall2 = lixiall2 + lixiall
@@ -116,16 +120,16 @@ def lixi(x,y,z):
         #将计算过程导出到txt
 
 lixiall2 = 0 #全局变量
-ss = 1
-#ss = input("分段数：")
+#ss = 1
+ss = input("分段数：")
 i = 0
 while ss > i :
-        x = "2014/1/1"
-        #x = raw_input("欠款时间（格式2015/1/1）：")
-        y = "2015/11/1"
-        #y = raw_input("还款时间（格式2015/1/1）：")
-        z = 10000
-        #z = input("欠款金额：")
+        #x = "2014/1/1"
+        x = raw_input("欠款时间（格式2015/1/1）：")
+        #y = "2015/11/1"
+        y = raw_input("还款时间（格式2015/1/1）：")
+        #z = 10000
+        z = input("欠款金额：")
         lixi(x,y,z)
         i+=1
 
