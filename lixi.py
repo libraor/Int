@@ -67,8 +67,9 @@ def lixi(x,y,z):
         day2 为计息日期差值
         '''
         #lixi = day*lilv*z 
-        lixi =0        
-        lixiall = 0
+        lixi =0
+        lixiall = 0 #分段利息合计
+        global lixiall2 #全局利息合计
         day2 = (lilv1[i]-25569)-(x/3600/24)-1
         #print lixiall
 
@@ -88,14 +89,15 @@ def lixi(x,y,z):
                 lixiall = lixiall + lixi
                 print (y/3600/24)-(lilv1[j]-25569)+1,'天 * 年息',lilv[j],'% =', lixi
 
-        print '利息合计：',lixiall
+        print '分段利息合计：',lixiall
+        lixiall2 = lixiall2 + lixiall
 
         return
 
 
         #将计算过程导出到txt
 
-
+lixiall2 = 0 #全局变量
 ss = input("分段数：")
 i = 0
 while ss > i :
@@ -105,3 +107,4 @@ while ss > i :
         lixi(x,y,z)
         i+=1
 
+print '利息总计：',lixiall2
