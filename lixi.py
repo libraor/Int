@@ -135,8 +135,9 @@ def lixi(x,y,z):
                 f.write(str1+'\n')
                 f.close()
 
-        result = ['分段利息合计：',lixiall]  #输出到txt
+        result = ['分段本金',z,'分段利息合计：',lixiall]  #输出到txt
         result[1] = str(result[1])
+        result[3] = str(result[3])
         str1 = " "
         str1 = str1.join(result)
         print str1
@@ -147,8 +148,16 @@ def lixi(x,y,z):
 
         return
 
+print "-------------------------"
+print "货款利息计算器 v1.19"
+print "作者：林尧 浙江星韵律师事务所"
+print "Email:linyao@foxmail.com"
+print "利率变动更新至2015年10月24日"
+print "-------------------------"
+print ""
 
-lixiall2 = 0 #全局变量
+
+lixiall2 = 0.0 #全局变量
 ss = 1
 #ss = input("分段数：")
 i = 0
@@ -159,11 +168,14 @@ while ss > i :
         #y = raw_input("还款时间（格式2015/1/1）：")
         z = 10000
         #z = input("欠款金额：")
+        zz = 0.0
+        zz = zz + z
         lixi(x,y,z)
         i+=1
 
-result = ['利息总计：',lixiall2] #输出到txt
+result = ['本金总计',zz,'利息总计：',lixiall2] #输出到txt
 result[1] = str(result[1])
+result[3] = str(result[3])
 str1 = " "
 str1 = str1.join(result)
 print str1
