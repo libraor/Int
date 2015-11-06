@@ -157,14 +157,14 @@ def lixi(x,y,z):
         return
 
 print "----------------------------"
-print "货款利息计算器 v1.19"
+print "货款利息计算器 v1.20"
 print "作者：林尧 浙江星韵律师事务所"
 print "Email:linyao@foxmail.com"
 print "利率变动更新至2015年10月24日"
 print "----------------------------"
 f = open("利息.txt",'w')
 f.write("-------------------------"+"\n")
-f.write("货款利息计算器 v1.19"+"\n")
+f.write("货款利息计算器 v1.20"+"\n")
 f.write("作者：林尧 浙江星韵律师事务所"+"\n")
 f.write("Email:linyao@foxmail.com"+"\n")
 f.write("利率变动更新至2015年10月24日"+"\n")
@@ -175,9 +175,10 @@ f.write("---------------------------------------------------------------"+"\n")
 f.close()
 
 lixiall2 = 0.0 #全局变量
-ss = 1
-#ss = input("分段数：")
+#ss = 1
+ss = input("分段数：")
 i = 0
+zz = 0.0 #本金统计变量
 while ss > i :
         #x = "2014/1/1"
         x = raw_input("起算日期（格式2015/1/1）：")
@@ -185,7 +186,6 @@ while ss > i :
         y = raw_input("结束日期（格式2015/1/1）：")
         #z = 10000.0
         z = input("欠款金额：")
-        zz = 0.0
         zz = zz + z
         lixi(x,y,z)
         i+=1
