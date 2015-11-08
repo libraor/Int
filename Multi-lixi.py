@@ -74,10 +74,15 @@ def lixi(x,y,z):
         lixi =0
         lixiall = 0 #分段利息合计
         global lixiall2 #全局利息合计
-        day2 = lilv1[i]-(x/3600/24)-1
+        if (y-x)/3600/24 < lilv1[i]-lilv1[j]: #判断计息期间是否有利息变动
+            day2 = (y-x)/3600/24
+        else:
+            day2 = lilv1[i]-(x/3600/24)-1
+        #print y-x
+        #print lilv1[i]-lilv1[j]
         #print lixiall
 
-        while lilv1[i] <= lilv1[j]:
+        while lilv1[i] < lilv1[j]:
                 lixi = day2*lilv[i-1]/100/360*z
                 lixiall = lixiall + lixi
                 if day2 == lilv1[i]-(x/3600/24)-1:
@@ -123,23 +128,45 @@ def lixi(x,y,z):
                 i+=1
                 day2 = lilv1[i]-lilv1[i-1]
         else:
-                lixi = ((y/3600/24)-lilv1[j]+1)*lilv[j]/100/360*z
-                lixiall = lixiall + lixi
-                date1 = datetime.datetime.utcfromtimestamp(lilv1[j]*24*3600)
-                dateout1 = date1.strftime("%Y年%m月%d日")
-                date2 = datetime.datetime.utcfromtimestamp(y+28800)
-                dateout2 = date2.strftime("%Y年%m月%d日")
-                result = [dateout1,dateout2,(y/3600/24)-lilv1[j]+1,'天 * 年息',lilv[j],'% =', lixi] #输出到txt
-                for k in range(0,7): 
-                        result[k] = str(result[k])
-                str1 = " "
-                str1 = str1.join(result)
-                print str1
-                print "---------------------------------------------------------------"
-                f = open("利息.txt",'a')
-                f.write(str1+'\n')
-                f.write("---------------------------------------------------------------"+"\n")
-                f.close()
+                if (y-x)/3600/24 < lilv1[i]-lilv1[j]:
+                    lixi = day2*lilv[j]/100/360*z
+                    lixiall = lixiall + lixi
+                    date1 = datetime.datetime.utcfromtimestamp(x+28800)
+                    dateout1 = date1.strftime("%Y年%m月%d日")
+                    date2 = datetime.datetime.utcfromtimestamp(y+28800)
+                    dateout2 = date2.strftime("%Y年%m月%d日")
+                    result = [dateout1,dateout2,day2,'天 * 年息',lilv[j],'% =', lixi] #输出到txt
+                    for k in range(0,7): 
+                            result[k] = str(result[k])
+                    str1 = " "
+                    str1 = str1.join(result)
+                    print str1
+                    print "---------------------------------------------------------------"
+                    f = open("利息.txt",'a')
+                    f.write(str1+'\n')
+                    f.write("---------------------------------------------------------------"+"\n")
+                    f.close()
+
+
+                else:
+
+                    lixi = ((y/3600/24)-lilv1[j]+1)*lilv[j]/100/360*z
+                    lixiall = lixiall + lixi
+                    date1 = datetime.datetime.utcfromtimestamp(lilv1[j]*24*3600)
+                    dateout1 = date1.strftime("%Y年%m月%d日")
+                    date2 = datetime.datetime.utcfromtimestamp(y+28800)
+                    dateout2 = date2.strftime("%Y年%m月%d日")
+                    result = [dateout1,dateout2,(y/3600/24)-lilv1[j]+1,'天 * 年息',lilv[j],'% =', lixi] #输出到txt
+                    for k in range(0,7): 
+                            result[k] = str(result[k])
+                    str1 = " "
+                    str1 = str1.join(result)
+                    print str1
+                    print "---------------------------------------------------------------"
+                    f = open("利息.txt",'a')
+                    f.write(str1+'\n')
+                    f.write("---------------------------------------------------------------"+"\n")
+                    f.close()
 
         result = ['分段本金',z,'分段利息合计：',lixiall]  #输出到txt
         result[1] = str(result[1])
@@ -180,9 +207,9 @@ ss = input("分段数：")
 i = 0
 zz = 0.0 #本金统计变量
 while ss > i :
-        #x = "2014/1/1"
+        #x = "2012/9/5"
         x = raw_input("起算日期（格式2015/1/1）：")
-        #y = "2015/11/1"
+        #y = "2014/8/15"
         y = raw_input("结束日期（格式2015/1/1）：")
         #z = 10000.0
         z = input("欠款金额：")
