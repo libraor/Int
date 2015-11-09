@@ -179,7 +179,7 @@ def lixi(x,y,z):
         return
 
 print "----------------------------"
-print "货款利息计算器 v1.20"
+print "货款利息计算器 v1.21"
 print "作者：林尧 浙江星韵律师事务所"
 print "Email:linyao@foxmail.com"
 print "利率变动更新至2015年10月24日"
