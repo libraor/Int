@@ -11,8 +11,8 @@ def lixi(x,y,z):
 
 
         '''
-        利率列表
-        lilv1利息变动日
+        利率列表  ！！！更新重点
+        lilv1利息变动日 
         lilv2六个月内利率
         lilv3六个月至一年利率
         lilv4一至三年利率
@@ -30,7 +30,10 @@ def lixi(x,y,z):
         #确认计息期间
         i = 0
         while x >=lilv1[i]*24*3600: 
-        	i+=1
+            if i < 39: #限制i取值，否则列表会溢出！！！更新重点
+                i+=1
+            else:
+                break
         j = -1
         while y <=lilv1[j]*24*3600:
         	j-=1
@@ -75,6 +78,25 @@ def lixi(x,y,z):
         lixiall = 0 #分段利息合计
         global lixiall2 #全局利息合计
         if (y-x)/3600/24 <= lilv1[i]-lilv1[j]: #判断计息期间是否有利息变动，如无变动，直接计算输出
+            day2 = (y-x)/3600/24
+            lixi = day2*lilv[j]/100/360*z
+            lixiall = lixiall + lixi
+            date1 = datetime.datetime.utcfromtimestamp(x+28800)
+            dateout1 = date1.strftime("%Y年%m月%d日")
+            date2 = datetime.datetime.utcfromtimestamp(y+28800)
+            dateout2 = date2.strftime("%Y年%m月%d日")
+            result = [dateout1,dateout2,day2,'天 * 年息',lilv[j],'% =', lixi] #输出到txt
+            for k in range(0,7): 
+                    result[k] = str(result[k])
+            str1 = " "
+            str1 = str1.join(result)
+            print str1
+            print "---------------------------------------------------------------"
+            f = open("利息.txt",'a')
+            f.write(str1+'\n')
+            f.write("---------------------------------------------------------------"+"\n")
+            f.close()
+        elif x/3600/24 >= 16732: #判断是否计息期间是否在最后一次利率调整之后 ！！！更新重点16732
             day2 = (y-x)/3600/24
             lixi = day2*lilv[j]/100/360*z
             lixiall = lixiall + lixi
@@ -179,14 +201,14 @@ def lixi(x,y,z):
         return
 
 print "----------------------------"
-print "货款利息计算器 v1.21"
+print "货款利息计算器 v1.23"
 print "作者：林尧 浙江星韵律师事务所"
 print "Email:linyao@foxmail.com"
 print "利率变动更新至2015年10月24日"
 print "----------------------------"
 f = open("利息.txt",'w')
 f.write("-------------------------"+"\n")
-f.write("货款利息计算器（多笔） v1.20"+"\n")
+f.write("货款利息计算器 v1.23"+"\n")
 f.write("作者：林尧 浙江星韵律师事务所"+"\n")
 f.write("Email:linyao@foxmail.com"+"\n")
 f.write("利率变动更新至2015年10月24日"+"\n")
@@ -197,17 +219,17 @@ f.write("---------------------------------------------------------------"+"\n")
 f.close()
 
 lixiall2 = 0.0 #全局变量
-#ss = 1
-ss = input("分段数：")
+ss = 1
+#ss = input("分段数：")
 i = 0
 zz = 0.0 #本金统计变量
 while ss > i :
-        #x = "2012/9/5"
-        x = raw_input("起算日期（格式2015/1/1）：")
-        #y = "2014/8/15"
-        y = raw_input("结束日期（格式2015/1/1）：")
-        #z = 10000.0
-        z = input("欠款金额：")
+        x = "2015/10/27"
+        #x = raw_input("起算日期（格式2015/1/1）：")
+        y = "2015/11/15"
+        #y = raw_input("结束日期（格式2015/1/1）：")
+        z = 10000.0
+        #z = input("欠款金额：")
         zz = zz + z
         lixi(x,y,z)
         i+=1
