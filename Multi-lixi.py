@@ -4,9 +4,9 @@ def lixi(x,y,z):
         #将输入时间转化为时间戳
         import time
         import datetime
-        x = time.strptime(x, "%Y/%m/%d")
+        x = time.strptime(x, "%Y-%m-%d")
         x = int(time.mktime(x))
-        y = time.strptime(y, "%Y/%m/%d")
+        y = time.strptime(y, "%Y-%m-%d")
         y = int(time.mktime(y))
 
 
@@ -85,7 +85,8 @@ def lixi(x,y,z):
             dateout1 = date1.strftime("%Y年%m月%d日")
             date2 = datetime.datetime.utcfromtimestamp(y+28800)
             dateout2 = date2.strftime("%Y年%m月%d日")
-            result = [dateout1,dateout2,day2,'天 * 年息',lilv[j],'% =', lixi] #输出到txt
+            lixi = round(lixi,2)
+            result = [dateout1,dateout2,day2,'天 * 年息',lilv[j],'% =   ', lixi] #输出到txt
             for k in range(0,7): 
                     result[k] = str(result[k])
             str1 = " "
@@ -104,7 +105,8 @@ def lixi(x,y,z):
             dateout1 = date1.strftime("%Y年%m月%d日")
             date2 = datetime.datetime.utcfromtimestamp(y+28800)
             dateout2 = date2.strftime("%Y年%m月%d日")
-            result = [dateout1,dateout2,day2,'天 * 年息',lilv[j],'% =', lixi] #输出到txt
+            lixi = round(lixi,2)
+            result = [dateout1,dateout2,day2,'天 * 年息',lilv[j],'% =   ', lixi] #输出到txt
             for k in range(0,7): 
                     result[k] = str(result[k])
             str1 = " "
@@ -133,7 +135,8 @@ def lixi(x,y,z):
                             dateout1 = date1.strftime("%Y年%m月%d日")
                             date2 = datetime.datetime.utcfromtimestamp(lilv1[i]*24*3600)
                             dateout2 = date2.strftime("%Y年%m月%d日")
-                    result = [dateout1,dateout2,day2,'天 * 年息', lilv[i-1],'% =', lixi] #输出到txt
+                    lixi = round(lixi,2)
+                    result = [dateout1,dateout2,day2,'天 * 年息', lilv[i-1],'% =   ', lixi] #输出到txt
                     for k in range(0,7): 
                             result[k] = str(result[k])
                     str1 = " "
@@ -151,7 +154,8 @@ def lixi(x,y,z):
                             dateout1 = date1.strftime("%Y年%m月%d日")
                             date2 = datetime.datetime.utcfromtimestamp(y+28800)
                             dateout2 = date2.strftime("%Y年%m月%d日")
-                            result = [dateout1,dateout2,(y/3600/24)-lilv1[j]+1,'天 * 年息',lilv[j],'% =', lixi] #输出到txt
+                            lixi = round(lixi,2)
+                            result = [dateout1,dateout2,(y/3600/24)-lilv1[j]+1,'天 * 年息',lilv[j],'% =   ', lixi] #输出到txt
                             for k in range(0,7): 
                                     result[k] = str(result[k])
                             str1 = " "
@@ -173,7 +177,8 @@ def lixi(x,y,z):
                     dateout1 = date1.strftime("%Y年%m月%d日")
                     date2 = datetime.datetime.utcfromtimestamp(y+28800)
                     dateout2 = date2.strftime("%Y年%m月%d日")
-                    result = [dateout1,dateout2,(y/3600/24)-lilv1[j]+1,'天 * 年息',lilv[j],'% =', lixi] #输出到txt
+                    lixi = round(lixi,2)
+                    result = [dateout1,dateout2,(y/3600/24)-lilv1[j]+1,'天 * 年息',lilv[j],'% =   ', lixi] #输出到txt
                     for k in range(0,7): 
                             result[k] = str(result[k])
                     str1 = " "
@@ -184,7 +189,7 @@ def lixi(x,y,z):
                     f.write(str1+'\n')
                     f.write("---------------------------------------------------------------"+"\n")
                     f.close()
-
+        lixiall = round(lixiall,2)
         result = ['分段本金',z,'分段利息合计：',lixiall]  #输出到txt
         result[1] = str(result[1])
         result[3] = str(result[3])
@@ -201,14 +206,14 @@ def lixi(x,y,z):
         return
 
 print "----------------------------"
-print "货款利息计算器 v1.24"
+print "货款利息计算器 v1.26"
 print "作者：林尧 浙江星韵律师事务所"
 print "Email:linyao@foxmail.com"
 print "利率变动更新至2015年10月24日"
 print "----------------------------"
 f = open("利息.txt",'w')
 f.write("-------------------------"+"\n")
-f.write("货款利息计算器 v1.24"+"\n")
+f.write("货款利息计算器 v1.26"+"\n")
 f.write("作者：林尧 浙江星韵律师事务所"+"\n")
 f.write("Email:linyao@foxmail.com"+"\n")
 f.write("利率变动更新至2015年10月24日"+"\n")
@@ -225,15 +230,15 @@ i = 0
 zz = 0.0 #本金统计变量
 while ss > i :
         #x = "2015/10/27"
-        x = raw_input("起算日期（格式2015/1/1）：")
+        x = raw_input("起算日期（格式2015-1-1）：")
         #y = "2015/11/15"
-        y = raw_input("结束日期（格式2015/1/1）：")
+        y = raw_input("结束日期（格式2015-1-1）：")
         #z = 10000.0
         z = input("欠款金额：")
         zz = zz + z
         lixi(x,y,z)
         i+=1
-
+lixiall2 = round(lixiall2,2)
 result = ['本金总计',zz,'利息总计：',lixiall2] #输出到txt
 result[1] = str(result[1])
 result[3] = str(result[3])
@@ -246,4 +251,4 @@ f.write(str1+'\n')
 f.write("---------------------------------------------------------------"+"\n")
 f.close()
 
-c = raw_input("利息.txt已生成至软件目录，按任意键关闭")
+c = raw_input("利息.txt已生成至软件目录，按回车键关闭")
