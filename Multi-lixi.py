@@ -206,14 +206,14 @@ def lixi(x,y,z):
         return
 
 print "----------------------------"
-print "货款利息计算器 v1.26"
+print "货款利息计算器 v1.27"
 print "作者：林尧 浙江泽大律师事务所"
 print "Email:linyao@foxmail.com"
 print "利率变动更新至2015年10月24日"
 print "----------------------------"
 f = open("利息.txt",'w')
 f.write("-------------------------"+"\n")
-f.write("货款利息计算器 v1.26"+"\n")
+f.write("货款利息计算器 v1.27"+"\n")
 f.write("作者：林尧 浙江泽大律师事务所"+"\n")
 f.write("Email:linyao@foxmail.com"+"\n")
 f.write("利率变动更新至2015年10月24日"+"\n")
